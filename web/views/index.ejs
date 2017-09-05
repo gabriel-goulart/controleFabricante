@@ -1,0 +1,64 @@
+
+<% contentFor('body') %>
+<div class="jumbotron">
+
+ <h3> Lista de Fabricantes
+ 	<button data-toggle="modal" data-target="#infoModal" class="btn btn-success pull-right" id="addFabricante">
+    	Cadastrar Fabricantes
+  	</button>
+ </h3>
+<br>
+ <table class="table table-hover">
+ 	<thead>
+ 		<th> Nome </th>
+ 		<th> CNPJ </th>
+ 		<th> Ações </th>
+ 	</thead>
+ 		
+ 	<tbody>
+  	<% for (fabricante of fabricantes){%>
+
+ 		<tr>
+ 			<td><%= fabricante.nome %></td>
+ 			<td><%= fabricante.cnpj %></td>
+ 			<td>
+ 				<a href="/new-entry" class="btn btn-info">
+    				Produtos
+  				</a>
+
+ 				<a href="/new-entry" class="btn btn-primary">
+    				Editar
+  				</a>
+ 				 
+ 				<a href="/new-entry" class="btn btn-danger">
+    				Excluir
+  				</a>
+ 			</td>
+ 		</tr>
+ 	<%}%>
+ 	</tbody>
+</table>
+
+</div>
+
+<div id="infoModal" class="modal fade" role="dialog">
+	<div class="modal-dialog" style="background: white">
+		
+	</div>
+</div>
+ 
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+
+ 		$('#addFabricante').click(function(e){
+ 			$.ajax({
+ 				url: "/criarfabricante",
+ 				async: false,
+ 				success: function(data){
+ 					$('.modal-dialog').html(data);
+ 				}
+ 			});
+ 		});
+ 	});
+ </script>
+	 
