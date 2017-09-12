@@ -1,8 +1,8 @@
-<div class="modal-header">
-	<h3>Cadastro de Fabricante</h3>
-</div>
+<% contentFor('body') %>
+<div class="jumbotron">
 
-<div class="modal-body">
+<h3>Cadastrar Fabricante</h3>
+
 	<form class="form-horizontal" action="" method="post">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="nome">Nome: </label>
@@ -19,13 +19,25 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-info"> Adicionar Produtos</button>
+					<div class="panel-group">
+					  <div class="panel panel-default">
+					    <div class="panel-heading">
+					      <h4 class="panel-title">
+					        <a data-toggle="collapse" href="#collapse1">Produtos</a>
+					      </h4>
+					    </div>
+					    <div id="collapse1" class="panel-collapse collapse">
+					      <div class="panel-body">Produtos</div>
+					      <div class="panel-footer">Panel Footer</div>
+					    </div>
+					  </div>
+					</div>
 			</div>
 		</div>
 		<div class="form-group text-center">
 				<div class="col-sm-offset-1 col-sm-10">
 					<button type="submit" class="btn btn-success"> Salvar</button>
-					<button type="button" data-dismiss="modal" class="btn btn-danger"> Cancelar</button>
+					<a href="/"><button type="button" class="btn btn-danger"> Cancelar</button></a>
 				</div>
 		</div>
 		
