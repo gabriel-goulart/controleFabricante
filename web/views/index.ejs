@@ -22,17 +22,22 @@
  			<td><%= fabricante.nome %></td>
  			<td><%= fabricante.cnpj %></td>
  			<td>
- 				<a href="/new-entry" class="btn btn-info">
+ 				<a href="/mostrarfabricanteprodutos/<%=fabricante.idfabricante%>" class="btn btn-info">
     				Produtos
   				</a>
 
- 				<a href="/new-entry" class="btn btn-primary">
+ 				<a href="/editarfabricante/<%=fabricante.idfabricante%>" class="btn btn-primary">
     				Editar
   				</a>
- 				 
- 				<a href="/new-entry" class="btn btn-danger">
-    				Excluir
-  				</a>
+ 				<% if (fabricante.ativo == 1) {%> 
+	 				<a href="/desativarfabricante/<%=fabricante.idfabricante%>" class="btn btn-danger">
+	    				Desativar
+	  				</a>
+	  			<%} else{ %>
+	  				<a href="/ativarfabricante/<%=fabricante.idfabricante%>" class="btn btn-success">
+	    				Ativar
+	  				</a>
+	  			<%}%>	
  			</td>
  		</tr>
  	<%}%>

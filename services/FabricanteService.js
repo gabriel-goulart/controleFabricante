@@ -49,14 +49,14 @@ exports.getTodosFabricantes=function(callback){
 						jsonRetorno += ",{" + "\"id\":" + row[i].idproduto + ", \"nome\": \""+row[i].nomeProduto+"\" , \"descricao\":\""+row[i].descricao+"\" , \"habilitado\":\""+row[i].ativo+"\", \"preco\":\""+row[i].preco+"\"}"; 
 					}else{
 						jsonRetorno += "]}";
-						jsonRetorno += ",{ \"idFabricante\":"+row[i].idfabricante + ", \"nome\": \"" +row[i].nomeFabricante+"\", \"cnpj\":\" "+ row[i].cnpj + "\""; 
+						jsonRetorno += ",{ \"idFabricante\":"+row[i].idfabricante + ", \"nome\": \"" +row[i].nomeFabricante+"\", \"cnpj\":\" "+ row[i].cnpj + "\" , \"ativo\":"+row[i].ativo; 
 						jsonRetorno += ", \"produtos\":[";
 						if(row[i].idproduto != null){
 							jsonRetorno += "{" + "\"id\":" + row[i].idproduto + ", \"nome\": \""+row[i].nomeProduto+"\" , \"descricao\":\""+row[i].descricao+"\" , \"habilitado\":\""+row[i].ativo+"\", \"preco\":\""+row[i].preco+"\"}"; 
 						}	
 					}
 				}else{
-					jsonRetorno += "{ \"idFabricante\":"+row[i].idfabricante + ", \"nome\": \""+row[i].nomeFabricante+"\", \"cnpj\":\" "+ row[i].cnpj + "\""; 
+					jsonRetorno += "{ \"idFabricante\":"+row[i].idfabricante + ", \"nome\": \""+row[i].nomeFabricante+"\", \"cnpj\":\" "+ row[i].cnpj + "\" , \"ativo\":"+row[i].ativo; 
 					jsonRetorno += ", \"produtos\":[";
 					if(row[i].idproduto != null){
 						jsonRetorno += "{" + "\"id\":" + row[i].idproduto + ", \"nome\": \""+row[i].nomeProduto+"\" , \"descricao\":\""+row[i].descricao+"\" , \"habilitado\":\""+row[i].ativo+"\", \"preco\":\""+row[i].preco+"\"}"; 

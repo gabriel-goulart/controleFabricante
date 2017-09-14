@@ -2,7 +2,7 @@ var db = require('./mysql_connect');
 
 exports.createFabricante = function(nome,cnpj,callback)
 {
-	return db.query("insert into fabricantes (nome,cnpj) values(?,?)",[nome,cnpj],callback);
+	return db.query("insert into fabricantes (nome,cnpj,ativo) values(?,?,1)",[nome,cnpj],callback);
 
 }
 
