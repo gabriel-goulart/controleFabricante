@@ -18,7 +18,7 @@ exports.getFabricanteProdutos=function(idFabricante, callback){
 exports.getTodosFabricantes=function(callback){
 
 	//return db.query("select f.* , group_concat('{ \"idproduto\":',fp.idproduto,',','\"nome\":','\"',fp.nome,'\"',',','\"descricao\":','\"',fp.descricao,'\"',',','\"preco\":','\"',fp.preco,'\"}') as produto from fabricantes f left join (select ftp.preco, ftp.idfabricante, p.* from fabricantesProdutos ftp inner join produtos p on ftp.idproduto = p.idproduto) fp on fp.idfabricante = f.idfabricante",callback);
-	return db.query("select f.idfabricante,f.nome nomeFabricante ,f.cnpj,fp.idproduto, fp.nome nomeProduto, fp.descricao, fp.preco, fp.ativo from fabricantes f inner join (select ftp.preco, ftp.idfabricante, p.* from fabricantesProdutos ftp inner join produtos p on ftp.idproduto = p.idproduto) fp on fp.idfabricante = f.idfabricante order by f.idfabricante asc",callback);
+	return db.query("select f.idfabricante,f.nome nomeFabricante ,f.cnpj,f.ativo estado,fp.idproduto, fp.nome nomeProduto, fp.descricao, fp.preco, fp.ativo from fabricantes f inner join (select ftp.preco, ftp.idfabricante, p.* from fabricantesProdutos ftp inner join produtos p on ftp.idproduto = p.idproduto) fp on fp.idfabricante = f.idfabricante order by f.idfabricante asc",callback);
 
 }
 
