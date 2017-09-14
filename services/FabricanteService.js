@@ -2,15 +2,34 @@ var request = require('request');
 var fabricante_persistencia = require('../persistence/FabricantePersistence');
 
 exports.createFabricante= function(info, callback){
-		console.log(info.produtoSelecionado.length);
-		console.log(info.produtoSelecionadoValor[5]);
-	for (var i = 0; i < info.produtoSelecionado.length; i++) {
-		var val = parseInt(info.produtoSelecionado[i]);
-		console.log(val);
-		console.log(info.produtoSelecionado[i]);
+	fabricante_persistencia.createFabricante(info.nome,info.cnpj, function(err,row){
+		if(!err){
+			console.log("Fabricante adicionado");
+			console.log("id inserido : " + row.insertId);			
+			if (info.produtoSelecionado){
+				for (var i = 0; i < info.produtoSelecionado.length; i++) {
+					for (var y = 0; y < info.produtoSelecionadoValor.length; y++) {
+						if(i == y){
+							console.log(info.produtoSelecionadoValor[y]);
+							fabricante_persistencia.createFabricanteProduto(row.insertId,info.produtoSelecionado[i],info.produtoSelecionadoValor[y],function(err, row1){
+								if(!err){
+									console.log("produto adicionado");
+								}else{
+									console.log("produto não adicionado");
+								}
+							});
+						}					
+					}				
+				}
+			}
+			return callback(false,row);	
+		}else{
+			console.log("Fabricante não adicionado");
+			return callback(true,null);
+		}
+	});	
 		
-	}
-	return callback(false,null);
+	
 }
 
 exports.getTodosFabricantes=function(callback){
@@ -53,10 +72,10 @@ exports.getTodosFabricantes=function(callback){
 		}
 	});
 } 
-/*
-exports.getTodosFabricantes=function(callback){
-	return fabricante_persistencia.getTodosFabricantes(callback);
-}	*/
+
+exports.getfabricantesList=function(callback){
+	return fabricante_persistencia.getfabricantesList(callback);
+}	
 
 exports.getFabricante=function(idFabricante){
 
@@ -71,7 +90,7 @@ exports.deleteFabricante=function(idFabricante){
 }
 
 exports.getProdutos=function(callback){
-	console.log('aqui');
+	
 	request('http://20.11.12.50:3000/api/produtos',{timeout:1500},function(erro,response,body){
 				//console.log(JSON.parse(body));
 				//var info = JSON.parse(body);

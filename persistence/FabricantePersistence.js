@@ -1,9 +1,13 @@
 var db = require('./mysql_connect');
 
-exports.createFabricante = function(fornecedorInfo,callback)
+exports.createFabricante = function(nome,cnpj,callback)
 {
-	return db.query("insert into Reserva (data,idusuario,idviagem,idassento,idreserva_periodica) values(str_to_date(?,'%d-%m-%Y'),?,?,?,?)",[bookingInfo.data,bookingInfo.idusuario,bookingInfo.idviagem,bookingInfo.idassento,bookingInfo.idreservaperiodica],callback);
+	return db.query("insert into fabricantes (nome,cnpj) values(?,?)",[nome,cnpj],callback);
 
+}
+
+exports.createFabricanteProduto = function(idfabricante,idproduto,preco,callback){
+	return db.query("insert into fabricantesProdutos (idfabricante,idproduto,preco) values(?,?,?)",[idfabricante,idproduto,preco],callback);
 }
 
 exports.getFabricanteProdutos=function(idFabricante, callback){
@@ -14,8 +18,11 @@ exports.getFabricanteProdutos=function(idFabricante, callback){
 exports.getTodosFabricantes=function(callback){
 
 	//return db.query("select f.* , group_concat('{ \"idproduto\":',fp.idproduto,',','\"nome\":','\"',fp.nome,'\"',',','\"descricao\":','\"',fp.descricao,'\"',',','\"preco\":','\"',fp.preco,'\"}') as produto from fabricantes f left join (select ftp.preco, ftp.idfabricante, p.* from fabricantesProdutos ftp inner join produtos p on ftp.idproduto = p.idproduto) fp on fp.idfabricante = f.idfabricante",callback);
-	return db.query("select f.idfabricante,f.nome nomeFabricante ,f.cnpj,fp.idproduto, fp.nome nomeProduto, fp.descricao, fp.preco, fp.ativo habilitado from fabricantes f inner join (select ftp.preco, ftp.idfabricante, p.* from fabricantesProdutos ftp inner join produtos p on ftp.idproduto = p.idproduto) fp on fp.idfabricante = f.idfabricante order by f.idfabricante asc",callback);
+	return db.query("select f.idfabricante,f.nome nomeFabricante ,f.cnpj,fp.idproduto, fp.nome nomeProduto, fp.descricao, fp.preco, fp.ativo from fabricantes f inner join (select ftp.preco, ftp.idfabricante, p.* from fabricantesProdutos ftp inner join produtos p on ftp.idproduto = p.idproduto) fp on fp.idfabricante = f.idfabricante order by f.idfabricante asc",callback);
 
 }
 
+exports.getfabricantesList=function(callback){
+	return db.query("select * from fabricantes", callback);
+}
 

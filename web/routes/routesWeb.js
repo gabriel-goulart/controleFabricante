@@ -9,10 +9,16 @@ router.get('/', function(req, res, next) {
         { nome: 'Martini', cnpj: 555554534543 },
         { nome: 'Scotch', cnpj: 10353535213565 }
     ];   
+  fabricanteService.getfabricantesList(function(err, fabricantes){
+  		if(!err){
+  			res.render('index', {
+		        fabricantes: fabricantes
+		     });
+  		}else{
+  			res.send("Sistema Indisponivel no momento");
+  		}
+  });
   
-  res.render('index', {
-        fabricantes: fabricantes
-     });
 });
 
 router.get('/criarfabricante', function(req, res, next) {
@@ -22,7 +28,13 @@ router.get('/criarfabricante', function(req, res, next) {
 
 router.post('/criarfabricante',function(req,res){
 	fabricanteService.createFabricante(req.body,function(err,row){
-
+		if(!err){
+			
+			res.redirect("/");
+		}else{
+			
+			res.redirect("/");
+		}
 	});
 });
 
