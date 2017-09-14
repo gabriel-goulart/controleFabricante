@@ -111,3 +111,9 @@ exports.getFabricanteProdutos=function(idFabricante,indice, callback){
 		return callback(err,row,indice);
 	});
 }
+
+exports.ativarFabricante=function(op,idfabricante,callback){
+	fabricante_persistencia.ativarFabricante(op,idfabricante,function(err,row){
+		return callback(err,row);
+	});
+}

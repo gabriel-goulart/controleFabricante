@@ -47,4 +47,10 @@ router.get('/produtos', function(req, res, next) {
 	});
   
 });
+
+router.get('/ativarfabricante/:op/:idfabricante', function(req,res, next){
+	fabricanteService.ativarFabricante(req.params.op, req.params.idfabricante, function(err,row){
+		res.redirect("/");
+	});
+});
 module.exports = router;

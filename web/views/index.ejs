@@ -30,11 +30,11 @@
     				Editar
   				</a>
  				<% if (fabricante.ativo == 1) {%> 
-	 				<a href="/desativarfabricante/<%=fabricante.idfabricante%>" class="btn btn-danger">
+	 				<a href="/ativarfabricante/0/<%=fabricante.idfabricante%>" class="btn btn-danger">
 	    				Desativar
 	  				</a>
 	  			<%} else{ %>
-	  				<a href="/ativarfabricante/<%=fabricante.idfabricante%>" class="btn btn-success">
+	  				<a href="/ativarfabricante/1/<%=fabricante.idfabricante%>" class="btn btn-success">
 	    				Ativar
 	  				</a>
 	  			<%}%>	

@@ -26,3 +26,7 @@ exports.getfabricantesList=function(callback){
 	return db.query("select * from fabricantes", callback);
 }
 
+exports.ativarFabricante=function(op, idfabricante, callback){
+	return db.query("UPDATE fabricantes SET ativo = ? WHERE idfabricante = ?",[op,idfabricante],callback);
+}
+
