@@ -7,19 +7,25 @@ exports.createFabricante= function(info, callback){
 			console.log("Fabricante adicionado");
 			console.log("id inserido : " + row.insertId);			
 			if (info.produtoSelecionado){
+				console.log(info.produtoSelecionado.length);
+				console.log(info.produtoSelecionadoValor);
+				var produtoValor = [];
+				for (var y = 0; y < info.produtoSelecionadoValor.length; y++) {
+					if(info.produtoSelecionadoValor[y] != ""){
+						produtoValor.push(info.produtoSelecionadoValor[y]);
+					}
+					
+				}
 				for (var i = 0; i < info.produtoSelecionado.length; i++) {
-					for (var y = 0; y < info.produtoSelecionadoValor.length; y++) {
-						if(i == y){
-							console.log(info.produtoSelecionadoValor[y]);
-							fabricante_persistencia.createFabricanteProduto(row.insertId,info.produtoSelecionado[i],info.produtoSelecionadoValor[y],function(err, row1){
-								if(!err){
-									console.log("produto adicionado");
-								}else{
-									console.log("produto não adicionado");
-								}
-							});
-						}					
-					}				
+							
+					console.log(produtoValor);
+					fabricante_persistencia.createFabricanteProduto(row.insertId,info.produtoSelecionado[i],produtoValor[i],function(err, row1){
+						if(!err){
+							console.log("produto adicionado");
+						}else{
+							console.log("produto não adicionado");
+						}
+					});									
 				}
 			}
 			return callback(false,row);	

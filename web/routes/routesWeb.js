@@ -3,12 +3,7 @@ var router = express.Router();
 var fabricanteService = require('../../services/FabricanteService');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-	var fabricantes = [
-        { nome: 'Bloody Mary', cnpj: 3333333333 },
-        { nome: 'Martini', cnpj: 555554534543 },
-        { nome: 'Scotch', cnpj: 10353535213565 }
-    ];   
+router.get('/', function(req, res, next) {	
   fabricanteService.getfabricantesList(function(err, fabricantes){
   		if(!err){
   			res.render('index', {
