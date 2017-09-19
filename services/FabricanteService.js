@@ -134,12 +134,23 @@ exports.deleteFabricante=function(idFabricante){
 
 exports.getProdutos=function(callback){
 	
-	request('http://20.11.12.50:3000/api/produtos',{timeout:1500},function(erro,response,body){
-				//console.log(JSON.parse(body));
-				//var info = JSON.parse(body);
-				//console.log(info.results[0].address_components[3].long_name);
-				return callback(erro,body);
-				//return  getCity(info.results[0].address_components[3].long_name,callback);
+	request('http://jpoker.pythonanywhere.com/api/produtos/',{timeout:1500},function(erro,response,body){
+				if(!erro){
+					var produtos = JSON.parse(body);
+					produtos = produtos['results']
+					for (var i = 0; i < produtos.length; i++) {
+						console.log(produtos[i]);
+						var sql = "INSERT INTO produtos (idproduto,nome,descricao,ativo) VALUES ("+produtos[i].id+", \""+produtos[i].nome+"\",\""+produtos[i].descricao+"\",\""+produtos[i].habilitado+"\") ON DUPLICATE KEY UPDATE idproduto="+produtos[i].id+", nome=\""+produtos[i].nome+"\", descricao= \""+produtos[i].descricao+"\", ativo= \""+produtos[i].habilitado+"\";";
+
+					 	fabricante_persistencia.insertProdutos(sql,function(err,row){
+					 		if(err){
+					 			return callback(true,body);	
+					 		}	
+					 	});	
+					} 
+					return callback(erro,body);	
+				}
+				return callback(erro,body);								
 		}); 
 }
 

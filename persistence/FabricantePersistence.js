@@ -39,3 +39,7 @@ exports.ativarFabricante=function(op, idfabricante, callback){
 	return db.query("UPDATE fabricantes SET ativo = ? WHERE idfabricante = ?",[op,idfabricante],callback);
 }
 
+exports.insertProdutos=function(info,callback){
+	return db.query(info,callback);
+}
+
