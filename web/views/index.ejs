@@ -22,7 +22,7 @@
  			<td><%= fabricante.nome %></td>
  			<td><%= fabricante.cnpj %></td>
  			<td>
- 				<a href="/mostrarfabricanteprodutos/<%=fabricante.idfabricante%>" class="btn btn-info">
+ 				<a id="#mostrarProdutos" data-toggle="modal" onclick="mostrarProdutos(<%=fabricante.idfabricante%>)" data-target="#infoModal" class="btn btn-info">
     				Produtos
   				</a>
 
@@ -55,15 +55,19 @@
  <script type="text/javascript">
  	$(document).ready(function(){
 
- 		$('#addFabricante').click(function(e){
- 			$.ajax({
- 				url: "/criarfabricante",
+ 		/*$('#mostrarProdutos').click(function(e){
+ 			console.log(e);
+ 		}); */
+ 	});
+
+ 	function mostrarProdutos(idfabricante){
+ 		$.ajax({
+ 				url: "/mostrarfabricanteprodutos/"+idfabricante,
  				async: false,
  				success: function(data){
  					$('.modal-dialog').html(data);
  				}
  			});
- 		});
- 	});
+ 	}
  </script>
 	 

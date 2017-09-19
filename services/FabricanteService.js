@@ -38,6 +38,43 @@ exports.createFabricante= function(info, callback){
 	
 }
 
+exports.atualizarFabricante= function(info, callback){
+	fabricante_persistencia.atualizarFabricante(info.id,info.nome,info.cnpj, function(err,row){
+		if(!err){
+			console.log("Fabricante Atualizado");
+			console.log("id atualizado : " + info.id);			
+			if (info.produtoSelecionado){
+				console.log(info.produtoSelecionado.length);
+				console.log(info.produtoSelecionadoValor);
+				var produtoValor = [];
+				for (var y = 0; y < info.produtoSelecionadoValor.length; y++) {
+					if(info.produtoSelecionadoValor[y] != ""){
+						produtoValor.push(info.produtoSelecionadoValor[y]);
+					}
+					
+				}
+				for (var i = 0; i < info.produtoSelecionado.length; i++) {
+							
+					console.log(produtoValor);
+					fabricante_persistencia.createFabricanteProduto(info.id,info.produtoSelecionado[i],produtoValor[i],function(err, row1){
+						if(!err){
+							console.log("produto adicionado");
+						}else{
+							console.log("produto não adicionado");
+						}
+					});									
+				}
+			}
+			return callback(false,row);	
+		}else{
+			console.log("Fabricante não atualizado");
+			return callback(true,null);
+		}
+	});	
+		
+	
+}
+
 exports.getTodosFabricantes=function(callback){
 	fabricante_persistencia.getTodosFabricantes(function(err,row){
 		if(!err){
@@ -83,8 +120,8 @@ exports.getfabricantesList=function(callback){
 	return fabricante_persistencia.getfabricantesList(callback);
 }	
 
-exports.getFabricante=function(idFabricante){
-
+exports.getFabricante=function(idfabricante,callback){
+	return 	fabricante_persistencia.getFabricante(idfabricante,callback);
 }
 
 exports.updateFabricante=function(idFabricante, info){
@@ -106,9 +143,9 @@ exports.getProdutos=function(callback){
 		}); 
 }
 
-exports.getFabricanteProdutos=function(idFabricante,indice, callback){
+exports.getFabricanteProdutos=function(idFabricante,callback){
 	fabricante_persistencia.getFabricanteProdutos(idFabricante,function(err,row){
-		return callback(err,row,indice);
+		return callback(err,row);
 	});
 }
 

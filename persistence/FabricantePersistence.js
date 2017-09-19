@@ -7,11 +7,17 @@ exports.createFabricante = function(nome,cnpj,callback)
 }
 
 exports.createFabricanteProduto = function(idfabricante,idproduto,preco,callback){
-	return db.query("insert into fabricantesProdutos (idfabricante,idproduto,preco) values(?,?,?)",[idfabricante,idproduto,preco],callback);
+	db.query("DELETE FROM fabricantesProdutos where idfabricante = ?",idfabricante,function(err,row){
+		if(!err)
+			return db.query("insert into fabricantesProdutos (idfabricante,idproduto,preco) values(?,?,?)",[idfabricante,idproduto,preco],callback);
+	});
 }
 
+exports.atualizarFabricante=function(idfabricante,nome,cnpj, callback){
+	return db.query("UPDATE fabricantes SET nome = ? , cnpj = ? WHERE idFabricante = ?",[nome,cnpj,idfabricante],callback);
+}
 exports.getFabricanteProdutos=function(idFabricante, callback){
-	return db.query("select p.nome nomeProduto,fp.* from fabricantesProdutos fp inner join fabricantes f on f.idfabricante = fp.idfabricante inner join produtos p on p.idproduto = fp.idproduto where fp.idfabricante = ?",idFabricante,callback);
+	return db.query("select p.nome nomeproduto, p.descricao,fp.* from fabricantesProdutos fp inner join fabricantes f on f.idfabricante = fp.idfabricante inner join produtos p on p.idproduto = fp.idproduto where fp.idfabricante = ?",idFabricante,callback);
 
 }
 
@@ -22,6 +28,9 @@ exports.getTodosFabricantes=function(callback){
 
 }
 
+exports.getFabricante=function(idfabricante, callback){
+	return db.query("select * from fabricantes where idfabricante = ?",idfabricante,callback);
+}
 exports.getfabricantesList=function(callback){
 	return db.query("select * from fabricantes", callback);
 }

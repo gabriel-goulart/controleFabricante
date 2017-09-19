@@ -1,0 +1,31 @@
+<div class="modal-content">
+	
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Produtos</h4>
+	</div>
+	<div class="modal-body">
+		<% if (produtos.length > 0) {%>	
+			<% for (produto of produtos){%>
+						
+					
+					<div class="panel-group" class="col-sm-3">
+					  <div class="panel panel-default">
+					    <div class="panel-heading">
+					      <h5 class="panel-title">
+					       <%=produto.idproduto %>  - <%=produto.nomeproduto %>
+					      </h5>
+					    </div>
+					    <div class="panel-body"><%=produto.descricao %></div>
+					    <div class="panel-footer">R$ <input type="number" name="produtoSelecionadoValor" readonly placeholder="Preço"  style="width: 70%" value="<%=produto.preco%>"></div>				     
+					  </div>
+					</div>
+						
+				
+			<%}%>
+		<%} else{%>
+			Nenhum Produto Cadastrado
+		<%}%>
+	</div>	
+	
+</div>

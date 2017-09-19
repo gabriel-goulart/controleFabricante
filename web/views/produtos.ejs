@@ -1,21 +1,31 @@
 <div>
 	
 	<% for (produto of produtos){%>
+		
 		<ul class="col-sm-3">			
-			<% if (produto.habilitado) {%>
+			<% if (produto.habilitado || produto.selecionado) {%>
 				<div class="panel-group">
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
-				      <h5 class="panel-title">
-				       <input type="checkbox" name="produtoSelecionado" value=<%=produto.id%> />  <%=produto.id %>  - <%=produto.nome %>
-				      </h5>
-				    </div>
-				    <div class="panel-body"><%=produto.descricao %></div>
-				    <div class="panel-footer">R$ <input type="number" name="produtoSelecionadoValor" placeholder="Preço"  style="width: 70%"></div>				     
+				    	<%if (produto.selecionado) {%>				    	
+					      <h5 class="panel-title">
+					       <input type="checkbox" name="produtoSelecionado" checked value=<%=produto.id%> />  <%=produto.id %>  - <%=produto.nome %>
+					      </h5>
+					      <div class="panel-body"><%=produto.descricao %></div>
+				   		  <div class="panel-footer">R$ <input type="number" name="produtoSelecionadoValor" placeholder="Preço" value="<%=produto.preco%>"  style="width: 70%"></div>
+					    <%} else{%> 
+					       <h5 class="panel-title">
+					       <input type="checkbox" name="produtoSelecionado" value="<%=produto.id%>" />  <%=produto.id %>  - <%=produto.nome %>
+					       </h5>
+					       <div class="panel-body"><%=produto.descricao %></div>
+				   		   <div class="panel-footer">R$ <input type="number" name="produtoSelecionadoValor" placeholder="Preço"  style="width: 70%"></div>
+					    <%}%> 
+				    </div>				     
 				  </div>
 				</div>
 			<%}%>	
-		</ul>	
+		</ul>
+				
 	<%}%>
 	
 </div>
