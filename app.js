@@ -5,15 +5,30 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayout = require('express-ejs-layouts');
+var passport = require('passport');
+require('./config/passport')(passport);
+var session = require("express-session");
+
+//var passport = require('passport');
+//var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+//var passport = require('./passport');
 
 var web = require('./web/routes/routesWeb');
 var api = require('./api/routes/routesApi');
 
 var app = express();
 
+app.use(session({secret: 'anystringoftext',
+				 saveUninitialized: true,
+				 resave: true}));
 // view engine setup
 app.set('views', path.join(__dirname+"/web/", 'views'));
 app.set('view engine', 'ejs');
+
+//app.use(session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -21,10 +36,29 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
 app.use('/api', api);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayout);
-app.use('/', web);
+app.use('/web', web);
+
+app.get('/auth/google', passport.authenticate('google', {scope: ['email','profile']}));
+
+app.get('/auth/google/callback', 
+	passport.authenticate('google', { failureRedirect: '/' }),
+  function(req, res) {
+    console.log(req.params);		
+    res.redirect('/web/');
+  });
+
+/* GET home page. */
+app.get('/', function(req, res, next) {	
+
+  res.render('login'); 
+  
+});
+
 
 
 // catch 404 and forward to error handler
