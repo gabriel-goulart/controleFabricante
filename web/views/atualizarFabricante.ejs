@@ -3,7 +3,7 @@
 
 <h3>Atualizar Fabricante</h3>
 	<% for (fabricante of fabricantes){ %> 
-	<form class="form-horizontal" action="/atualizarfabricante" method="post">
+	<form class="form-horizontal" action="/web/atualizarfabricante" method="post">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="cnpj">ID: </label>
 			<div class="col-sm-10">
@@ -43,7 +43,7 @@
 		<div class="form-group text-center">
 				<div class="col-sm-offset-1 col-sm-10">
 					<button type="submit" class="btn btn-success"> Salvar</button>
-					<a href="/"><button type="button" class="btn btn-danger"> Cancelar</button></a>
+					<a href="/web"><button type="button" class="btn btn-danger"> Cancelar</button></a>
 				</div>
 		</div>
 		
@@ -59,7 +59,7 @@
  	function pegarProdutos(idfabricante){
  		console.log(idfabricante);
  		$.ajax({
- 				url: "/atualizarprodutos/"+idfabricante,
+ 				url: "/web/atualizarprodutos/"+idfabricante,
  				async: false,
  				success: function(data){
  					$('#campoprodutos').html(data);

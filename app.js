@@ -69,10 +69,9 @@ app.get('/', function(req, res, next) {
 
 app.post('/cadastrarfabricante',function(req,res){
   fabricanteService.cadastrarFabricante(req.body,function(err,row){
-    if(!err){      
+    if(err){      
       res.redirect("/");
-    }else{
-      
+    }else{      
       res.redirect("/web/"+row);
     }
   });
