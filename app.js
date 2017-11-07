@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayout = require('express-ejs-layouts');
 var passport = require('passport');
+var fabricanteService = require('./services/FabricanteService');
 require('./config/passport')(passport);
 var session = require("express-session");
 
@@ -48,8 +49,15 @@ app.get('/auth/google', passport.authenticate('google', {scope: ['email','profil
 app.get('/auth/google/callback', 
 	passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
-    console.log(req.params);		
-    res.redirect('/web/');
+    fabricanteService.getFabricante(req.user.id, function(err,row){
+        if(err || row.length <= 0){
+          console.log("request " + req.user.id);
+          res.render('cadastroFabricante',{ idfabricante: req.user.id}); 
+        }else{
+          res.redirect('/web/'+req.user.id); 
+       }
+    });
+    
   });
 
 /* GET home page. */
@@ -59,7 +67,16 @@ app.get('/', function(req, res, next) {
   
 });
 
-
+app.post('/cadastrarfabricante',function(req,res){
+  fabricanteService.cadastrarFabricante(req.body,function(err,row){
+    if(!err){      
+      res.redirect("/");
+    }else{
+      
+      res.redirect("/web/"+row);
+    }
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

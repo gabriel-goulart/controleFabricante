@@ -14,7 +14,7 @@ exports.createFabricanteProduto = function(idfabricante,idproduto,preco,callback
 }
 
 exports.atualizarFabricante=function(idfabricante,nome,cnpj, callback){
-	return db.query("UPDATE fabricantes SET nome = ? , cnpj = ? WHERE idFabricante = ?",[nome,cnpj,idfabricante],callback);
+	return db.query("UPDATE fabricantes SET nome = ? , cnpj = ? WHERE idfabricante = ?",[nome,cnpj,idfabricante],callback);
 }
 exports.getFabricanteProdutos=function(idFabricante, callback){
 	return db.query("select p.nome nomeproduto, p.descricao,fp.* from fabricantesProdutos fp inner join fabricantes f on f.idfabricante = fp.idfabricante inner join produtos p on p.idproduto = fp.idproduto where fp.idfabricante = ?",idFabricante,callback);
@@ -41,5 +41,9 @@ exports.ativarFabricante=function(op, idfabricante, callback){
 
 exports.insertProdutos=function(info,callback){
 	return db.query(info,callback);
+}
+
+exports.cadastrarFabricante = function(info,callback){
+	return db.query("insert into fabricantes (idfabricante,nome,cnpj,ativo) values(?,?,?,1)",[info.id,info.nome,info.cnpj],callback);
 }
 

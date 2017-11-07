@@ -16,6 +16,20 @@ router.get('/', function(req, res, next) {
   
 });
 
+/* GET home page. */
+router.get('/:idfabricante', function(req, res, next) {	
+  fabricanteService.getFabricante(req.params.idfabricante,function(err, fabricantes){
+  		if(!err){
+  			res.render('index', {
+		        fabricantes: fabricantes
+		     });
+  		}else{
+  			res.send("Sistema Indisponivel no momento");
+  		}
+  });
+  
+});
+
 router.get('/criarfabricante', function(req, res, next) {
 	
   res.render('criarFabricante');

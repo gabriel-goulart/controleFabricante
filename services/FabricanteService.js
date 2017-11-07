@@ -38,6 +38,14 @@ exports.createFabricante= function(info, callback){
 	
 }
 
+exports.cadastrarFabricante=function(info,callback){
+	fabricante_persistencia.cadastrarFabricante(info, function(err, row){
+			if(err) return callback(true,null);
+
+			return callback(false,row.insertId);
+	});
+}
+
 exports.atualizarFabricante= function(info, callback){
 	fabricante_persistencia.atualizarFabricante(info.id,info.nome,info.cnpj, function(err,row){
 		if(!err){
