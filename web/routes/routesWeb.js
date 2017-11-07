@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
   fabricanteService.getfabricantesList(function(err, fabricantes){
   		if(!err){
   			res.render('index', {
-		        fabricantes: fabricantes
+		        fabricantes: fabricantes,
+			logout:false
 		     });
   		}else{
   			res.send("Sistema Indisponivel no momento");
@@ -22,7 +23,8 @@ router.get('/:idfabricante', function(req, res, next) {
 	fabricanteService.getFabricanteIdGoogle(req.params.idfabricante,function(err, fabricantes){
   		if(!err){ console.log(fabricantes);
   			res.render('index', {
-		        fabricantes: fabricantes
+		        fabricantes: fabricantes,
+			logout:true
 		     });
   		}else{
   			res.send("Sistema Indisponivel no momento");
@@ -32,7 +34,7 @@ router.get('/:idfabricante', function(req, res, next) {
 });
 
 router.get('/criarfabricante', function(req, res, next) {
-	
+  console.log("criar fabricante sdfdsf");	
   res.render('criarFabricante');
 });
 

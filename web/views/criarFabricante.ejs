@@ -3,7 +3,7 @@
 
 <h3>Cadastrar Fabricante</h3>
 
-	<form class="form-horizontal" action="/criarfabricante" method="post">
+	<form class="form-horizontal" action="/web/criarfabricante" method="post">
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="nome">Nome: </label>
 			<div class="col-sm-10">
@@ -36,7 +36,7 @@
 		<div class="form-group text-center">
 				<div class="col-sm-offset-1 col-sm-10">
 					<button type="submit" class="btn btn-success"> Salvar</button>
-					<a href="/"><button type="button" class="btn btn-danger"> Cancelar</button></a>
+					<a href="/web"><button type="button" class="btn btn-danger"> Cancelar</button></a>
 				</div>
 		</div>
 		
@@ -48,7 +48,7 @@
 
  		$('#addproduto').click(function(e){
  			$.ajax({
- 				url: "/produtos",
+ 				url: "/web/produtos",
  				async: false,
  				success: function(data){
  					$('#campoprodutos').html(data);

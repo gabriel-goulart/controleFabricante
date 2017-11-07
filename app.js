@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayout = require('express-ejs-layouts');
 var passport = require('passport');
+var request = require('request');
 var fabricanteService = require('./services/FabricanteService');
 require('./config/passport')(passport);
 var session = require("express-session");
@@ -59,6 +60,11 @@ app.get('/auth/google/callback',
     });
     
   });
+
+app.get('/auth/logout', (req, res) => {
+  req.logout();	
+  res.redirect('/');
+});
 
 /* GET home page. */
 app.get('/', function(req, res, next) {	
