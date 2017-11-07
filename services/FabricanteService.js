@@ -42,7 +42,7 @@ exports.cadastrarFabricante=function(info,callback){
 	fabricante_persistencia.cadastrarFabricante(info.id,info.nome,info.cnpj, function(err, row){
 			if(err) return callback(true,null);
 
-			return callback(false,row.insertId);
+			return callback(false,info.id);
 	});
 }
 
@@ -130,6 +130,10 @@ exports.getfabricantesList=function(callback){
 
 exports.getFabricante=function(idfabricante,callback){
 	return 	fabricante_persistencia.getFabricante(idfabricante,callback);
+}
+
+exports.getFabricanteIdGoogle=function(idfabricante,callback){
+	 return  fabricante_persistencia.getFabricanteIdGoogle(idfabricante,callback);
 }
 
 exports.updateFabricante=function(idFabricante, info){

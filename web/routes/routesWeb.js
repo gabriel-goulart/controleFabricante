@@ -18,8 +18,9 @@ router.get('/', function(req, res, next) {
 
 /* GET home page. */
 router.get('/:idfabricante', function(req, res, next) {	
-  fabricanteService.getFabricante(req.params.idfabricante,function(err, fabricantes){
-  		if(!err){
+  	console.log(req.params.idfabricante);
+	fabricanteService.getFabricanteIdGoogle(req.params.idfabricante,function(err, fabricantes){
+  		if(!err){ console.log(fabricantes);
   			res.render('index', {
 		        fabricantes: fabricantes
 		     });

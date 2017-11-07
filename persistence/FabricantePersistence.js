@@ -2,7 +2,7 @@ var db = require('./mysql_connect');
 
 exports.createFabricante = function(nome,cnpj,callback)
 {
-	return db.query("insert into fabricantes (nome,cnpj,ativo) values(?,?,1)",[nome,cnpj],callback);
+	return db.query("insert into fabricantes (idgoogle,nome,cnpj,ativo) values(1,?,?,1)",[nome,cnpj],callback);
 
 }
 
@@ -31,6 +31,10 @@ exports.getTodosFabricantes=function(callback){
 exports.getFabricante=function(idfabricante, callback){
 	return db.query("select * from fabricantes where idfabricante = ?",idfabricante,callback);
 }
+
+exports.getFabricanteIdGoogle=function(idfabricante, callback){
+	return db.query("select * from fabricantes where idgoogle like ?",idfabricante,callback);
+}
 exports.getfabricantesList=function(callback){
 	return db.query("select * from fabricantes", callback);
 }
@@ -44,6 +48,6 @@ exports.insertProdutos=function(info,callback){
 }
 
 exports.cadastrarFabricante = function(id,nome,cnpj,callback){
-	return db.query("insert into fabricantes (idfabricante,nome,cnpj,ativo) values(?,?,?,1)",[id,nome,cnpj],callback);
+	return db.query("insert into fabricantes (idgoogle,nome,cnpj,ativo) values(?,?,?,1)",[id,nome,cnpj],callback);
 }
 
