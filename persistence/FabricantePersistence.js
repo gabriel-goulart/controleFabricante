@@ -43,7 +43,7 @@ exports.insertProdutos=function(info,callback){
 	return db.query(info,callback);
 }
 
-exports.cadastrarFabricante = function(info,callback){
-	return db.query("insert into fabricantes (idfabricante,nome,cnpj,ativo) values(?,?,?,1)",[info.id,info.nome,info.cnpj],callback);
+exports.cadastrarFabricante = function(id,nome,cnpj,callback){
+	return db.query("insert into fabricantes (idfabricante,nome,cnpj,ativo) values(?,?,?,1)",[id,nome,cnpj],callback);
 }
 
