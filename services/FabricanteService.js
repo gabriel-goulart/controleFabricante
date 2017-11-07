@@ -87,6 +87,7 @@ exports.getTodosFabricantes=function(callback){
 	fabricante_persistencia.getTodosFabricantes(function(err,row){
 		if(!err){
 			jsonRetorno = "[";
+			if(row.length <= 0) return callback(false,JSON.parse("[]"));
 			for (var i = 0; i < row.length; i++) {
 				console.log(i);
 				if(i != 0){

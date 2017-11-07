@@ -49,7 +49,7 @@ app.get('/auth/google', passport.authenticate('google', {scope: ['email','profil
 app.get('/auth/google/callback', 
 	passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
-    fabricanteService.getFabricante(req.user.id, function(err,row){
+    fabricanteService.getFabricanteIdGoogle(req.user.id, function(err,row){
         if(err || row.length <= 0){
           console.log("request " + req.user.id);
           res.render('cadastroFabricante',{ idfabricante: req.user.id}); 
