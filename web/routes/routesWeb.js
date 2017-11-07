@@ -39,10 +39,10 @@ router.post('/criarfabricante',function(req,res){
 	fabricanteService.createFabricante(req.body,function(err,row){
 		if(!err){
 			
-			res.redirect("/");
+			res.redirect("/web");
 		}else{
 			
-			res.redirect("/");
+			res.redirect("/web");
 		}
 	});
 });
@@ -51,10 +51,10 @@ router.post('/atualizarfabricante',function(req,res){
 	fabricanteService.atualizarFabricante(req.body,function(err,row){
 		if(!err){
 			
-			res.redirect("/");
+			res.redirect("/web");
 		}else{
 			
-			res.redirect("/");
+			res.redirect("/web");
 		}
 	});
 });
@@ -112,7 +112,7 @@ router.get('/atualizarprodutos/:idfabricante', function(req, res, next) {
 
 router.get('/ativarfabricante/:op/:idfabricante', function(req,res, next){
 	fabricanteService.ativarFabricante(req.params.op, req.params.idfabricante, function(err,row){
-		res.redirect("/");
+		res.redirect("/web");
 	});
 });
 
