@@ -47,6 +47,10 @@ exports.insertProdutos=function(info,callback){
 	return db.query(info,callback);
 }
 
+exports.getAllprodutos=function(callback){
+	return db.query("select * from produtos",callback);
+}
+
 exports.cadastrarFabricante = function(id,nome,cnpj,callback){
 	return db.query("insert into fabricantes (idgoogle,nome,cnpj,ativo) values(?,?,?,1)",[id,nome,cnpj],callback);
 }

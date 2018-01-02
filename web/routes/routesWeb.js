@@ -99,6 +99,7 @@ router.get('/atualizarprodutos/:idfabricante', function(req, res, next) {
 				        produtos: produto
 				     });
   				}else{
+					console.log('atualizar produtos- erro');	
   					res.render('produtos', {
 				        produtos: produtos['results'],
 				        produtosSelecionados: []
@@ -107,7 +108,35 @@ router.get('/atualizarprodutos/:idfabricante', function(req, res, next) {
   			})
   			
   		}else{
-  			res.send('Produtos indisponiveis');
+			//console.log(row);
+			var produtos = row;//JSON.parse(row);	
+			fabricanteService.getFabricanteProdutos(req.params.idfabricante,function(err2,row2){
+                                if(!err2){
+                                        var produto= produtos;
+                                        for (var i =0 ; i < produto.length; i++) {
+                                                produto[i].selecionado = false;
+                                                for(var y=0; y < row2.length; y++){
+                                                        if(produto[i].idproduto == row2[y].idproduto)
+                                                        {
+                                                                produto[i].selecionado = true;
+                                                                produto[i].preco = row2[y].preco;
+                                                        }
+                                                }
+                                        }
+                                        console.log(produto);
+                                        res.render('produtos', {
+                                        produtos: produto
+                                     });
+                                }else{
+                                        console.log('atualizar produtos- erro');
+                                        res.render('produtos', {
+                                        produtos: produtos,
+                                        produtosSelecionados: []
+                                     });
+                                }
+                        })
+
+  			//res.send('Produtos indisponiveis');
   		}
 	});
   

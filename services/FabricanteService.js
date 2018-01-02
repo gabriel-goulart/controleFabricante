@@ -147,7 +147,8 @@ exports.deleteFabricante=function(idFabricante){
 
 exports.getProdutos=function(callback){
 	
-	request('http://jpoker.pythonanywhere.com/api/produtos/',{timeout:1500},function(erro,response,body){
+	request('http://jpokerd.dpythonanywhere.com/api/produtos/',{timeout:1500},function(erro,response,body){
+				console.log(body);
 				if(!erro){
 					var produtos = JSON.parse(body);
 					produtos = produtos['results']
@@ -157,13 +158,19 @@ exports.getProdutos=function(callback){
 
 					 	fabricante_persistencia.insertProdutos(sql,function(err,row){
 					 		if(err){
+								console.log('erro 1');
 					 			return callback(true,body);	
 					 		}	
 					 	});	
 					} 
+					console.log('erro');
 					return callback(erro,body);	
 				}
-				return callback(erro,body);								
+				console.log('erro 2');
+				fabricante_persistencia.getAllprodutos(function(err,row){
+					return callback(true,row);
+				});
+				//return callback(true,body);								
 		}); 
 }
 
